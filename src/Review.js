@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import React from "react";
 import axios from "axios";
-
 import './Review.css'
 
 

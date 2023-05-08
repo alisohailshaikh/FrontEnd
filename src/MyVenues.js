@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./LocationList.css";
-import { SearchBar } from "./SearchBar";
+
 
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -55,7 +55,7 @@ const LocationCard = ({ location }) => {
   );
 };
 
-const LocationsList = () => {
+const MyVenues = () => {
   const [locations, setLocations] = useState([]);
   const navigate = useNavigate();
 
@@ -87,9 +87,8 @@ const LocationsList = () => {
         <div className="left-page">
           <SideBar/>
         </div>
-        <div class="right-page">
+        
            <div className="locations-container">
-              {/* <SearchBar /> */}
               <h1 className="locations-heading">List of Locations</h1>
                {locations.map((location) => (
             <LocationCard key={location.locationID} location={location} />
@@ -98,9 +97,8 @@ const LocationsList = () => {
           <LocationButton />
          </div>
          </div>
-         </div>
       );
 };
 
-export default LocationsList;
+export default MyVenues;
 

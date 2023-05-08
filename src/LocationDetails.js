@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
+import ReviewModal from "./addReview"
 
 import ReviewList from "./Review";
 import { useNavigate } from "react-router-dom";
@@ -10,23 +11,23 @@ import jwtDecode from "jwt-decode";
 //MAKE API TO RETURN SINGLE LOCATION WITH DETAILS ON BACKEND
 
 
-// const ReviewButton = () => { 
-//   const id = useParams().id;
-//   console.log(`THIS IS ID ${id}`);
-//   const domain = jwtDecode(localStorage.getItem("token")).userType;
-//   if (domain == "user") {
-//         return(      
-//         <div className="addButton">
-//              <ReviewModal id={id}/>
-//         </div>
-//      );
-//      }
-//      else {
-//       return(
-//         <div></div>
-//       )
-//      }
-//   };
+const ReviewButton = () => { 
+  const id = useParams().id;
+  console.log(`THIS IS ID ${id}`);
+  const domain = jwtDecode(localStorage.getItem("token")).userType;
+  if (domain == "user") {
+        return(      
+        <div className="addButton">
+             <ReviewModal id={id}/>
+        </div>
+     );
+     }
+     else {
+      return(
+        <div></div>
+      )
+     }
+  };
 
 const Location = ({ location}) => {
      return (
@@ -74,7 +75,7 @@ const LocationDetails = () => {
         {locations.map((location) => (
           <Location key={location.locationID} location={location} />
         ))}
-        {/* <ReviewButton/>*/}
+        <ReviewButton/>
         <ReviewList/> 
       </div>
     );

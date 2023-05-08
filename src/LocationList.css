@@ -1,29 +1,21 @@
 .page-container{
   display: flex;
-}
 
+}
 .page-container right{
   flex: 1;
-  width: 960px;
+  flex-direction: row;
+  
 }
-
-.page-container left{
-  flex: 1;
-}
-
-
-
-
 
 .locations-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  flex: 1;
+  flex-direction: row;
   
 }
-
-
-
 .locations-heading {
   font-size: 2rem;
   text-align: center;
