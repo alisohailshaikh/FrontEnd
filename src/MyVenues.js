@@ -69,7 +69,7 @@ const LocationCard = ({ location }) => {
         <p>Rent: {location.locationRent}</p>
         <p>Capacity: {location.Capacity}</p>
       </div>
-      <button onClick={handleArchive}>Archive Location</button>
+      <button onClick={handleArchive}>Archive</button>
     </div>
   );
 };
