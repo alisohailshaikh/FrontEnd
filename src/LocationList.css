@@ -31,7 +31,6 @@
   display: flex; 
   gap: 20px;
   align-items: flex-start;
-  
 }
 
 .location-card left {
@@ -56,12 +55,13 @@
   bottom: 1rem;
   right: 1rem;
   padding: 0.5rem 1rem;
-  background-color: #008c8c;
+  background-color: #dfa8a8;
   color: #fff;
   border: none;
   border-radius: 0.25rem;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+  transform: translateX(0px);
 }
 
 .location-card button:hover {
@@ -80,6 +80,10 @@
 img.image {
   max-width: 265px;
   max-height: 320px;
+  position: relative;
  
 }
+
+
+
 

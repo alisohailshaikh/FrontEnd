@@ -6,7 +6,7 @@ import ReviewModal from "./addReview"
 import ReviewList from "./Review";
 import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-// import ReviewModal from "./addReview";
+import SideBar from "./Components/SideBardata";
 
 //MAKE API TO RETURN SINGLE LOCATION WITH DETAILS ON BACKEND
 
@@ -68,6 +68,10 @@ const LocationDetails = () => {
   },[]);
     
     return (
+      <div className="page-container">
+      <div className="left-page">
+        <SideBar/>
+      </div>
       
       <div className="locations-container">
        
@@ -77,6 +81,7 @@ const LocationDetails = () => {
         ))}
         <ReviewButton/>
         <ReviewList/> 
+      </div>
       </div>
     );
 };

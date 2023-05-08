@@ -22,7 +22,7 @@ export const Dashboard = () => {
   return (
     <div>
        
-      <h1 className="dashboard-heading">Welcome</h1>
+     
       <div className="sidebar"><SideBar /></div>
      
       
@@ -54,7 +54,6 @@ export const Dashboard = () => {
           </button>
         </div>
       </div>
-      <div className="user-name">{username}</div>
     </div>
   );
 };

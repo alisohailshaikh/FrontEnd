@@ -37,6 +37,7 @@
     background-color: white;
     transform: translateY(150px);
     border-radius: 10px;
+    content: normal;
   }
   .LoginForm{
     padding: 1rem;

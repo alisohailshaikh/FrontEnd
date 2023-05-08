@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import './App.css'
 
 export const LoginU = (props) => {
   const [email, setEmail] = useState("ali@gmail.com");

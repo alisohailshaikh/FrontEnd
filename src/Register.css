@@ -30,6 +30,8 @@
     transform: translateX(650px);
     width:850px;
     height: 710px;
+   
+ 
   }
   .SmallContainer{
     padding: 1rem;
@@ -38,6 +40,7 @@
     background-color: white;
     transform: translateY(50px);
     border-radius: 10px;
+    position: fixed;
   }
   .LoginForm{
     padding: 1rem;
@@ -101,5 +104,11 @@ label{
   a {
     text-decoration: none;
     color: white;
+  }
+
+  .ResiterForm{
+    contain: content;
+    max-height: fit-content;
+    height: fit-content;
   }
   

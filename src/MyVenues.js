@@ -31,8 +31,27 @@ const LocationButton = () => {
 const LocationCard = ({ location }) => {
   const navigate = useNavigate();
   console.log(location.image);
-  const handleBooking = () => {
-    navigate(`/location/${location.locationID}`);
+  const handleArchive = () => {
+    let config = {
+      method: 'patch',
+      maxBodyLength: Infinity,
+      url: `http://localhost:3001/location/archive/ ${location.locationID}`,
+      headers: { 
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
+      }
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+      navigate("/myVenues");
+     
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+   
+   
   };
   const url =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ8fSutPfnvrchFksz5P06HO7PnAyg7F6-9trWPbJuKw&s";
@@ -50,7 +69,7 @@ const LocationCard = ({ location }) => {
         <p>Rent: {location.locationRent}</p>
         <p>Capacity: {location.Capacity}</p>
       </div>
-      <button onClick={handleBooking}>Book Location</button>
+      <button onClick={handleArchive}>Archive Location</button>
     </div>
   );
 };
@@ -61,25 +80,21 @@ const MyVenues = () => {
 
   React.useEffect(() => {
     let config = {
-      method: "get",
-      maxBodyLength: Infinity,
-      url: "http://localhost:3001/location",
-      headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhbGlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkd0FzQUNBWmVMRW1ZYmh5U29NbmxxdXVEMkxHM3ZWOTJiclJlOEU0b2lad21kSFVZcnVQQWEiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNjgwMjk0MjI5fQ.qWwpK6nHlRr_RrR372ufQ8QYP7ZT8qckNK5vB2Ij71w",
-      },
+       method: 'get',
+       maxBodyLength: Infinity,
+       url: 'http://localhost:3001/location/displaylocation',
+       headers: { 
+          'Authorization': `Bearer ${localStorage.getItem("token")}` 
+        }
     };
-
-    axios
-      .request(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
-        setLocations(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    axios.request(config)
+       .then((response) => {
+          console.log(JSON.stringify(response.data));
+          setLocations(response.data)
+        }).catch((error) => {
+          console.log(error);
+        });}
+    , []);
 
   return (
    
@@ -89,12 +104,11 @@ const MyVenues = () => {
         </div>
         
            <div className="locations-container">
-              <h1 className="locations-heading">List of Locations</h1>
+              <h1 className="locations-heading">Your Locations</h1>
                {locations.map((location) => (
             <LocationCard key={location.locationID} location={location} />
           ))}
-          <LocationButton />
-          <LocationButton />
+         
          </div>
          </div>
       );

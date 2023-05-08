@@ -87,7 +87,6 @@ const LocationsList = () => {
         <div className="left-page">
           <SideBar/>
         </div>
-        <div class="right-page">
            <div className="locations-container">
               {/* <SearchBar /> */}
               <h1 className="locations-heading">List of Locations</h1>
@@ -98,7 +97,7 @@ const LocationsList = () => {
           <LocationButton />
          </div>
          </div>
-         </div>
+        
       );
 };
 

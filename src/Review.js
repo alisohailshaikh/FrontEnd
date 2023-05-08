@@ -10,7 +10,7 @@ const ReviewCard = ({ review }) => {
    return (
       <div className="review-card" key={review.reviewID}>
           <div className = "left">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" style={{ width: '50px', height: '50px'}} />
+            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="" style={{ width: '50px', height: '50px',position: "relative"}} />
           </div>
           <div className="right">
             <p>User: {review.userID}</p>

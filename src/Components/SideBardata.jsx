@@ -71,7 +71,7 @@ const SideBar = () => {
   return (
     <div className="SB">
       <ul className="SBList">
-        <div className="Heading">eventbanao.pk</div>
+        <div className="Heading">  eventbanao.pk</div>
         {SideBarData.map((val, key) => {
           return (
             <li

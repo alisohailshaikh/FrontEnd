@@ -77,7 +77,8 @@
   width: 850px;
   margin-left: 450px;  
   transform: translateY(-800px);
-  height: 800px 
+  height: 800px;
+  position: relative;
 }
 
 
