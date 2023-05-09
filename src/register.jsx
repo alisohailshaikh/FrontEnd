@@ -11,7 +11,7 @@ export const Register = (props) => {
   const [name, setName] = useState("");
   const [pw, setPasswrod] = useState("");
   const [cnic, setCnic] = useState("");
-  const [error,setError] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -28,7 +28,7 @@ export const Register = (props) => {
     console.log(email);
     let data = JSON.stringify({
       name: `${name}`,
-      password: `${pw}`,
+      password:`${pw}`,
       cnic: `${cnic}`,
       email: `${email}`,
     });
@@ -107,7 +107,8 @@ export const Register = (props) => {
               name="cnic"
             />
             {/* <button className="SignUpRegButton">SIGNUP</button> */}
-            <button disabled={!validateForm}>SIGNUP</button>
+            <div className="error">{error}</div>
+            <button disabled={!validateForm()}>SIGNUP</button>
             {/* <button onClick={()=> props.onFormSwitch('login')}>LOGIN</button> */}
           </form>
           <label className="Already">Already Have an Account?</label>
