@@ -31,11 +31,12 @@ const LocationButton = () => {
 const LocationCard = ({ location }) => {
   const navigate = useNavigate();
   console.log(location.image);
+  
   const handleArchive = () => {
-    let config = {
+      let config = {
       method: 'patch',
       maxBodyLength: Infinity,
-      url: `http://localhost:3001/location/archive/ ${location.locationID}`,
+      url: 'http://localhost:3001/location/unarchive/80',
       headers: { 
         'Authorization': `Bearer ${localStorage.getItem("token")}`
       }
@@ -44,12 +45,12 @@ const LocationCard = ({ location }) => {
     axios.request(config)
     .then((response) => {
       console.log(JSON.stringify(response.data));
-      navigate("/archive");
-     
+      navigate("/myVenues");
     })
     .catch((error) => {
       console.log(error);
     });
+    
    
    
   };
@@ -69,31 +70,33 @@ const LocationCard = ({ location }) => {
         <p>Rent: {location.locationRent}</p>
         <p>Capacity: {location.Capacity}</p>
       </div>
-      <button onClick={handleArchive}>Archive</button>
+      <button onClick={handleArchive}>Unarchive</button>
     </div>
   );
 };
 
-const MyVenues = () => {
+const ArchivedVenues = () => {
   const [locations, setLocations] = useState([]);
   const navigate = useNavigate();
 
   React.useEffect(() => {
     let config = {
-       method: 'get',
-       maxBodyLength: Infinity,
-       url: 'http://localhost:3001/location/displaylocation',
-       headers: { 
-          'Authorization': `Bearer ${localStorage.getItem("token")}` 
+        method: 'get',
+        maxBodyLength: Infinity,
+        url: 'http://localhost:3001/location/archived',
+        headers: { 
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
         }
-    };
-    axios.request(config)
-       .then((response) => {
-          console.log(JSON.stringify(response.data));
-          setLocations(response.data)
-        }).catch((error) => {
-          console.log(error);
-        });}
+      };
+      
+      axios.request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        setLocations(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });}
     , []);
 
   return (
@@ -104,7 +107,7 @@ const MyVenues = () => {
         </div>
         
            <div className="locations-container">
-              <h1 className="locations-heading">Your Locations</h1>
+              <h1 className="locations-heading">Archived Locations</h1>
                {locations.map((location) => (
             <LocationCard key={location.locationID} location={location} />
           ))}
@@ -114,5 +117,5 @@ const MyVenues = () => {
       );
 };
 
-export default MyVenues;
+export default ArchivedVenues;
 

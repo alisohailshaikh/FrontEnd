@@ -48,7 +48,7 @@ function AddLocation() {
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
-        navigate("/DB");
+        navigate("/myVenues");
       })
       .catch((error) => {
         console.log(error);

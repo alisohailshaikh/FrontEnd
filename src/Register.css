@@ -80,6 +80,11 @@ label{
 
   }
 
+  button:disabled{
+    color:#dfa8a8;
+    background-color: white;
+  }
+
   button {
     transform: translateX(90px);
     width: 200px;

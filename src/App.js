@@ -14,6 +14,7 @@ import Testing from './testing';
 import LocationDetails from './LocationDetails';
 import AddLocation from './addLocation';
 import MyVenues from './MyVenues';
+import ArchivedVenues from './ArchivedVenues';
 
 function App() {
   const [currForm,setCurrForm]=useState('login');
@@ -38,7 +39,9 @@ function App() {
       <Route path='/SearchBar' element={<SearchBar/>}/>
       <Route path='/addLocation' element={<AddLocation/>}/>
       <Route path="/myVenues" element={<MyVenues/>}/>
+      <Route path="/archive" element={<ArchivedVenues/>}/>
       <Route path="location/:id" element={<LocationDetails/>} />
+
 
       </Routes>
     </Router>

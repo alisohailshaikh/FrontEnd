@@ -53,7 +53,7 @@ const SideBar = () => {
         {
           titile: "Archived",
           icon: <ArchiveIcon />,
-          link: "/Archive",
+          link: "/archive",
         },
         {
           titile: "Deleted",
