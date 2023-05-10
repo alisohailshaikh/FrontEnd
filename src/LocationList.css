@@ -67,7 +67,8 @@
 }
 
 .location-card button:hover {
-  background-color: #0f4242;
+  background-color: white;
+  color: #dfa8a8;
 }
 
 .location-card button:disabled {
