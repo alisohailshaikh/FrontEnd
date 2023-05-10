@@ -1,5 +1,6 @@
 .parent{
   display: flex;
+  background-color: rgb(246, 229, 199);
 }
 
 .SB{
@@ -25,6 +26,7 @@ form {
     flex-direction: row;
     flex:3;
     justify-content: flex-start;
+    background-color: rgb(246, 229, 199);
 }
 
 .heading{

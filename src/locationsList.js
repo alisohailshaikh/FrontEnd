@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./LocationList.css";
-import { SearchBar } from "./SearchBar";
 
+import { SearchBar } from "./SearchBar";
+import "./LocationList.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
@@ -87,7 +87,6 @@ const LocationsList = () => {
         <SideBar />
       </div>
       <div className="locations-container">
-        {/* <SearchBar /> */}
         <h1 className="locations-heading">List of Locations</h1>
         {locations.map((location) => (
           <LocationCard key={location.locationID} location={location} />

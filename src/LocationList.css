@@ -10,13 +10,12 @@
 }
 
 .locations-container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 2rem;
   flex: 1;
   flex-direction: row;
-  
-  
+  background-color: rgb(246, 229, 199);
 }
 .locations-heading {
   font-size: 2rem;
@@ -25,7 +24,7 @@
 }
 
 .location-card {
-  border: 5px solid rgb(246, 229, 199);
+  border: 5px solid rgb(247, 246, 245);
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -33,6 +32,7 @@
   display: flex; 
   gap: 20px;
   align-items: flex-start;
+  background-color: white;
 }
 
 .location-card left {
@@ -83,6 +83,7 @@ img.image {
   max-width: 265px;
   max-height: 320px;
   position: relative;
+  z-index: 1;
  
 }
 

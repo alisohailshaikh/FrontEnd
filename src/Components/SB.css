@@ -4,7 +4,7 @@
     /* transform: translateY(-87px); */
     background-color: white;
     position: relative;
-    width: 350px;
+    width: 100%;
     height: 100%;
     
   }
@@ -17,8 +17,6 @@
   }
   .SBRow{
     transform: translateY(90px);
-    /* width: 100%;
-    height: 60px; */
     list-style-type: none;
     margin: 0%;
     display: flex;
