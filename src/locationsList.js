@@ -82,24 +82,21 @@ const LocationsList = () => {
   }, []);
 
   return (
-   
-       <div className="page-container">
-        <div className="left-page">
-          <SideBar/>
-        </div>
-           <div className="locations-container">
-              {/* <SearchBar /> */}
-              <h1 className="locations-heading">List of Locations</h1>
-               {locations.map((location) => (
-            <LocationCard key={location.locationID} location={location} />
-          ))}
-          <LocationButton />
-          <LocationButton />
-         </div>
-         </div>
-        
-      );
+    <div className="page-container">
+      <div className="left-page">
+        <SideBar />
+      </div>
+      <div className="locations-container">
+        {/* <SearchBar /> */}
+        <h1 className="locations-heading">List of Locations</h1>
+        {locations.map((location) => (
+          <LocationCard key={location.locationID} location={location} />
+        ))}
+        <LocationButton />
+        <LocationButton />
+      </div>
+    </div>
+  );
 };
 
 export default LocationsList;
-

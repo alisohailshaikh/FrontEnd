@@ -1,5 +1,6 @@
 .page-container{
   display: flex;
+ 
 
 }
 .page-container right{
@@ -15,6 +16,7 @@
   flex: 1;
   flex-direction: row;
   
+  
 }
 .locations-heading {
   font-size: 2rem;
@@ -23,7 +25,7 @@
 }
 
 .location-card {
-  border: 5px solid #000;
+  border: 5px solid rgb(246, 229, 199);
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 1rem;

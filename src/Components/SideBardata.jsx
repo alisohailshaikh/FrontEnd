@@ -5,6 +5,7 @@ import BalconyIcon from "@mui/icons-material/Balcony";
 import ExploreIcon from "@mui/icons-material/Explore";
 import ArchiveIcon from "@mui/icons-material/Archive";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {LogoutRounded } from "@mui/icons-material";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import jwtDecode from "jwt-decode";
 import "./SB.css";
@@ -26,6 +27,11 @@ const SideBar = () => {
           icon: <PermContactCalendarIcon />,
           link: "/perInfo",
         },
+        {
+          titile: "Log Out",
+          icon: <LogoutRounded/>,
+          link: "/",
+        }
       ]);
     } else {
       setSideBarData([
@@ -65,6 +71,11 @@ const SideBar = () => {
           icon: <PermContactCalendarIcon />,
           link: "/perInfo",
         },
+        {
+          titile: "Log Out",
+          icon: <LogoutRounded/>,
+          link: "/",
+        }
       ]);
     }
   }, []);
