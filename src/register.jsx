@@ -97,12 +97,12 @@ export const Register = (props) => {
               id="password"
               name="password"
             />
-            <label htmlFor="Cnic">CNIC</label>
+            <label htmlFor="Cnic">Contact Number</label>
             <input
               value={cnic}
               onChange={(e) => setCnic(e.target.value)}
               type="cnic"
-              placeholder="42201-..."
+              placeholder="03xx-..."
               id="cnic"
               name="cnic"
             />

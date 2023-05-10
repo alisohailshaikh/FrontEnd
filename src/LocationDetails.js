@@ -2,9 +2,8 @@ import { useParams } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 import ReviewModal from "./addReview"
-
+import LandlordDetails from "./LandlordDetails";
 import ReviewList from "./Review";
-import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import SideBar from "./Components/SideBardata";
 
@@ -30,21 +29,30 @@ const ReviewButton = () => {
   };
 
 const Location = ({ location}) => {
+  const id = useParams().id;
      return (
       <div>
         <h2>{location.locationName}</h2>
+  
         <p> <img src= {location.image} alt="" className="image"/></p>
+        <div className="container">
+        <div className="details">
         <p>
           {location.locationArea}, {location.locationAddress}
         </p>
         <p>Rent: {location.locationRent}</p>
         <p>Capacity: {location.Capacity}</p>
+        </div>
+        <div className="landlordButton">
+               <LandlordDetails id={id}/>
+        </div>
+      </div>
       </div>
     );
  };
 
 const LocationDetails = () => {
-    const id = useParams().id;
+  const id = useParams().id;
     console.log(`THIS IS ID ${id}`);
     const [locations, setLocations] = useState([]);
     React.useEffect(() => {
@@ -72,13 +80,13 @@ const LocationDetails = () => {
       <div className="left-page">
         <SideBar/>
       </div>
-      
       <div className="locations-container">
-       
         <h1 className="locations-heading">This is your location</h1>
         {locations.map((location) => (
           <Location key={location.locationID} location={location} />
         ))}
+        
+       
         <ReviewButton/>
         <ReviewList/> 
       </div>

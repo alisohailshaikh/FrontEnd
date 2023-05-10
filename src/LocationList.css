@@ -84,6 +84,18 @@ img.image {
  
 }
 
+.location container{
+  display: flex;
+}
+.container details{
+  flex-direction: row;
+  flex: 1;
+}
+
+.container landlordbutton {
+  flex-direction: row;
+  flex: 1;
+}
 
 
 
