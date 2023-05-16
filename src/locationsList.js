@@ -32,6 +32,24 @@ const LocationCard = ({ location }) => {
   const navigate = useNavigate();
   console.log(location.image);
   const handleBooking = () => {
+    let config = {
+      method: "patch",
+      maxBodyLength: Infinity,
+      url: `http://localhost:3001/location/increment/${location.locationID}`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     navigate(`/location/${location.locationID}`);
   };
   const url =
