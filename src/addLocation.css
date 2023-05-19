@@ -71,13 +71,13 @@ form {
     /* margin-bottom: 10px; */
     box-sizing: border-box;
     height: 60px;
-    color: #fff;
+    background-color: #fff;
     font-family: "Poppins", sans-serif;
     font-weight: bold;
   }
    .submit{
     padding: 0.5rem 1rem;
-    background-color: #DE9898;
+    /* background-color: #DE9898; */
     color: #fff;
     border: none;
     border-radius: 0.25rem;

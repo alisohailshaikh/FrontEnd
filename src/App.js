@@ -15,6 +15,10 @@ import LocationDetails from './LocationDetails';
 import AddLocation from './addLocation';
 import MyVenues from './MyVenues';
 import ArchivedVenues from './ArchivedVenues';
+import { SignInSide } from './SignupUser';
+import { LoginUser } from './LoginUser';
+import { SignupLandlord } from './SignupLandlord';
+import { LoginLandlord } from './LoginLandlord';
 
 function App() {
   const [currForm,setCurrForm]=useState('login');
@@ -29,10 +33,10 @@ function App() {
       <Routes>
       <Route exact path='/' element={<Title_Page/>}/>
       <Route exact path='/DB' element={<Dashboard/>}/>
-      <Route path='/login' element={<Login/>}/>
-      <Route path='/signup' element={<Register/>}/>
-      <Route path='/loginU' element={<LoginU/>}/>
-      <Route path='/signupU' element={<RegisterU/>}/>
+      <Route path='/login' element={<LoginLandlord/>}/>
+      <Route path='/signup' element={<SignupLandlord/>}/>
+      <Route path='/loginU' element={<LoginUser/>}/>
+      <Route path='/signupU' element={<SignInSide/>}/>
       <Route path='/Team' element={<Member1/>}/>
       <Route path='location' element={<LocationsList/>}/>
       <Route path='testing' element={<Testing/>}/>

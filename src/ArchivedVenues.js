@@ -36,7 +36,7 @@ const LocationCard = ({ location }) => {
       let config = {
       method: 'patch',
       maxBodyLength: Infinity,
-      url: 'http://localhost:3001/location/unarchive/80',
+      url: `http://localhost:3001/location/unarchive/${location.locationID}`,
       headers: { 
         'Authorization': `Bearer ${localStorage.getItem("token")}`
       }

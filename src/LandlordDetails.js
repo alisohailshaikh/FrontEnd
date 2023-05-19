@@ -30,7 +30,7 @@ const LandlordDetails = (props) => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `http://localhost:3001/landlord/${id}`,
+        url: `http://localhost:3001/landlord/ID/${id}`,
         headers: { 
           'Authorization': `Bearer ${localStorage.getItem("token")}` 
         }
