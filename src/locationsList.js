@@ -76,7 +76,6 @@ const LocationCard = ({ location }) => {
 const LocationsList = () => {
   const [locations, setLocations] = useState([]);
   const navigate = useNavigate();
-
   React.useEffect(() => {
     let config = {
       method: "get",
@@ -84,7 +83,7 @@ const LocationsList = () => {
       url: "http://localhost:3001/location",
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhbGlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkd0FzQUNBWmVMRW1ZYmh5U29NbmxxdXVEMkxHM3ZWOTJiclJlOEU0b2lad21kSFVZcnVQQWEiLCJ1c2VyVHlwZSI6ImFkbWluIiwiaWF0IjoxNjgwMjk0MjI5fQ.qWwpK6nHlRr_RrR372ufQ8QYP7ZT8qckNK5vB2Ij71w",
+        `Bearer ${localStorage.getItem("token")}`,
       },
     };
 
