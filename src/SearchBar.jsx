@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./SearchBar.css";
-
+import axios from "axios";
 const areas = [
   "Area A",
   "Area B",
@@ -15,20 +15,25 @@ const areas = [
 const types = ["Banquet", "Lawn", "Hall", "Hotel", "Resort"];
 
 export const SearchBar = () => {
-  const [area, setArea] = useState("");
+  const [area, setArea] = useState(null);
+  const [searchArea, setSearchArea] = useState("");
   const [type, setType] = useState("");
-  const [priceMin, setPriceMin] = useState("");
-  const [priceMax, setPriceMax] = useState("");
-  const [capacityMin, setCapacityMin] = useState("");
-  const [capacityMax, setCapacityMax] = useState("");
-  const [showAreaDropdown, setShowAreaDropdown] = useState(false);
+  const [searchType, setSearchType] = useState("");
+  const [priceMin, setPriceMin] = useState(null);
+  const [priceMax, setPriceMax] = useState(null);
+  const [capacityMin, setCapacityMin] = useState(null);
+  const [capacityMax, setCapacityMax] = useState(null);
+  const [areaDropdowns, setAreaDropdowns] = useState([]);
   const [showTypeDropdown, setShowTypeDropdown] = useState(false);
+  const [showMoreOptions, setShowMoreOptions] = useState(false);
 
   const handleAreaChange = (event) => {
+    setSearchArea(event.target.value);
     setArea(event.target.value);
   };
 
   const handleTypeChange = (event) => {
+    setSearchType(event.target.value);
     setType(event.target.value);
   };
 
@@ -48,26 +53,78 @@ export const SearchBar = () => {
     setCapacityMax(event.target.value);
   };
 
-  const handleAreaDropdownItemClick = () => {
-    setShowAreaDropdown(false);
-  };
-
-  const handleTypeDropdownItemClick = () => {
-    setShowTypeDropdown(false);
-  };
-
   const handleAreaSelect = (value) => {
     setArea(value);
-    setShowAreaDropdown(false);
+    setSearchArea("");
+    //setShowAreaDropdown(false);
   };
-  
+
+  const handleTypeSelect = (value) => {
+    setType(value);
+    setSearchType("");
+    //setShowAreaDropdown(false);
+  };
+
+  const handleMoreOptionsClick = () => {
+    setShowMoreOptions(!showMoreOptions);
+  };
+
+  const handleSubmit = () => {
+    const params = {
+      location: area,
+      maxCapacity: capacityMax,
+      minCapacity: capacityMin,
+      minPrice: priceMin,
+      maxPrice: priceMax,
+    };
+
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `http://localhost:3001/location/filter`,
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhbGlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkQmwvcHZlYjNQWWRWNFNsZWI2SktvZVpGSUhrREFwL2ZKNk1NcFdCMWRiUEtIeEFrRnhrQ3UiLCJ1c2VyVHlwZSI6ImxhbmRsb3JkIiwiaWF0IjoxNjg0NTAyNDgwfQ.Y9sK8GIT33Lby9tbmbohrGm4UIxECoKY2Lwzw0kWHbo",
+      },
+    };
+    const filteredParams = Object.entries(params)
+      .filter(([key, value]) => value !== null)
+      .reduce((obj, [key, value]) => {
+        obj[key] = value;
+        return obj;
+      }, {});
+
+    // Construct the query string from filteredParams
+    const queryString = Object.entries(filteredParams)
+      .map(
+        ([key, value]) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+      )
+      .join("&");
+
+    // Append the query string to the URL
+    config.url += `?${queryString}`;
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="search-bar-container">
-
+      <link
+        href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+        rel="stylesheet"
+      />
       <div className="search-bar">
         {/* Area */}
-        <div className="search-bar-input-container">Area
+        <div className="search-bar-input-container">
+          Area
           <input
             className="search-bar-input"
             type="text"
@@ -75,13 +132,18 @@ export const SearchBar = () => {
             value={area}
             onChange={handleAreaChange}
           />
-          {area && (
+          {searchArea && (
             <div className="search-bar-dropdown">
               {areas
-                .filter((item) => item.toLowerCase().includes(area.toLowerCase()))
+                .filter((item) =>
+                  item.toLowerCase().includes(area.toLowerCase())
+                )
                 .map((item, index) => (
-                  <div key={index} className="search-bar-dropdown-item"
-                  onClick={() => setArea(item)} >
+                  <div
+                    key={index}
+                    className="search-bar-dropdown-item"
+                    onClick={() => handleAreaSelect(item)}
+                  >
                     {item}
                   </div>
                 ))}
@@ -89,7 +151,8 @@ export const SearchBar = () => {
           )}
         </div>
         {/* TYPPE */}
-        <div className="search-bar-input-container">Type
+        <div className="search-bar-input-container">
+          Type
           <input
             className="search-bar-inputT"
             type="text"
@@ -97,61 +160,80 @@ export const SearchBar = () => {
             value={type}
             onChange={handleTypeChange}
           />
-          {type && (
+          {searchType && (
             <div className="search-bar-dropdownT">
               {types
-                .filter((item) => item.toLowerCase().includes(type.toLowerCase()))
+                .filter((item) =>
+                  item.toLowerCase().includes(type.toLowerCase())
+                )
                 .map((item, index) => (
-                  <div key={index} className="search-bar-dropdown-item">
+                  <div
+                    key={index}
+                    className="search-bar-dropdown-item"
+                    onClick={() => handleTypeSelect(item)}
+                  >
                     {item}
                   </div>
                 ))}
             </div>
           )}
         </div>
-        <button className="search-bar-search-button">
-              <i className="fas fa-search"></i>
+        <button onClick={handleSubmit} className="search-bar-search-button">
+          <i className="fas fa-search"></i>
         </button>
-        {/* proce */}
-        <div className="search-bar-input-container1">
-          <div className="search-bar-range-input">
-            <input
-              className="search-bar-input1"
-              type="number"
-              placeholder="Min"
-              value={priceMin}
-              onChange={handlePriceMinChange}
-            />
-            <div className="search-bar-range-input-label">Price</div>
-            <input
-              className="search-bar-input1"
-              type="number"
-              placeholder="Max"
-              value={priceMax}
-              onChange={handlePriceMaxChange}
-            />
-          </div>
-          </div>
+        <button onClick={handleMoreOptionsClick} className="moreButton">
+          <i className="fas fa-caret-down"></i>
+          {showMoreOptions ? "Less Options" : "More Options"}
+        </button>
+        {/* <div className="more-options"> */}
+        <div
+          className="optional-fields"
+          style={{ height: showMoreOptions ? "auto" : 0, overflow: "hidden" }}
+        >
+          {/* proce */}
           <div className="search-bar-input-container1">
-          <div className="search-bar-range-input">
-            <input
-              className="search-bar-input1"
-              type="number"
-              placeholder="Min"
-              value={capacityMin}
-              onChange={handleCapacityMinChange}
+            Price
+            <div className="search-bar-range-input">
+              <input
+                className="search-bar-input1"
+                type="number"
+                placeholder="Min"
+                value={priceMin}
+                onChange={handlePriceMinChange}
               />
-              <div className="search-bar-range-input-label">Capacity</div>
-            <input
-              className="search-bar-input1"
-              type="number"
-              placeholder="Max"
-              value={capacityMax}
-              onChange={handleCapacityMaxChange}
-            />
+              <div className="search-bar-range-input-label">to</div>
+              <input
+                className="search-bar-input1"
+                type="number"
+                placeholder="Max"
+                value={priceMax}
+                onChange={handlePriceMaxChange}
+              />
+            </div>
+          </div>
+          <div className="search-bar-input-container1Cap">
+            Capacity
+            <div className="search-bar-range-input">
+              <input
+                className="search-bar-input1"
+                type="number"
+                placeholder="Min"
+                value={capacityMin}
+                onChange={handleCapacityMinChange}
+              />
+              <div className="search-bar-range-input-label">to</div>
+              <input
+                className="search-bar-input1"
+                type="number"
+                placeholder="Max"
+                value={capacityMax}
+                onChange={handleCapacityMaxChange}
+              />
+            </div>
           </div>
         </div>
+        {/* </div> */}
       </div>
     </div>
-  )};
-           
+  );
+};

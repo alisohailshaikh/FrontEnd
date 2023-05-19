@@ -128,7 +128,7 @@ export const Dashboard = () => {
             <p>{avg}</p>
           </div>
           <div className="card">
-            <h2>Archieve</h2>
+            <h2>Archive</h2>
             <p>{arch}</p>
           </div>
           <div className="cardChart">
