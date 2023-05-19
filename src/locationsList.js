@@ -63,8 +63,9 @@ const LocationCard = ({ location }) => {
       <div className="right"> 
         <h2>{location.locationName}</h2>
         <p>
-          {location.locationArea},{location.locationAddress}
-        </p>
+          Area: {location.locationArea}</p>
+          <p>Address: {location.locationAddress}</p>
+        
         <p>Rent: {location.locationRent}</p>
         <p>Capacity: {location.Capacity}</p>
       </div>
@@ -75,7 +76,13 @@ const LocationCard = ({ location }) => {
 
 const LocationsList = () => {
   const [locations, setLocations] = useState([]);
+  const [filteredLocations,setfilteredLocations] = useState([]);
+  const [showAllLocations, setShowAllLocations] = useState(true);
   const navigate = useNavigate();
+  const handleSearch = (searchLocations) => {
+    setfilteredLocations(searchLocations);
+    setShowAllLocations(false);
+  };
   React.useEffect(() => {
     let config = {
       method: "get",
@@ -105,11 +112,15 @@ const LocationsList = () => {
       </div>
       <div className="locations-container">
       <div className="Search">
-          <SearchBar />
+          <SearchBar onSearch={handleSearch} />
         </div>
         <h1 className="locations-heading">List of Locations</h1>
-        {locations.map((location) => (
-          <LocationCard key={location.locationID} location={location} />
+        {showAllLocations
+          ? locations.map((location) => (
+              <LocationCard key={location.locationID} location={location} />
+            ))
+          : filteredLocations.map((location) => (
+              <LocationCard key={location.locationID} location={location} />
         ))}
         <LocationButton />
         <LocationButton />

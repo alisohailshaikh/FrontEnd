@@ -4,7 +4,7 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
-export const SearchBar = () => {
+export const SearchBar = ({ onSearch }) => {
   const [area, setArea] = useState("");
   const [searchArea, setSearchArea] = useState("");
   const [type, setType] = useState("");
@@ -67,6 +67,51 @@ export const SearchBar = () => {
     setType(value);
     setSearchType("");
     //setShowAreaDropdown(false);
+  };
+
+  const handleSubmit = () => {
+    const params = {
+      location: area,
+      maxCapacity: capacityMax,
+      minCapacity: capacityMin,
+      minPrice: priceMin,
+      maxPrice: priceMax,
+    };
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `http://localhost:3001/location/filter`,
+      headers: {
+        Authorization:
+        `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+
+    const filteredParams = Object.entries(params)
+      .filter(([key, value]) => value !== null)
+      .reduce((obj, [key, value]) => {
+        obj[key] = value;
+        return obj;
+      }, {});
+
+    const queryString = Object.entries(filteredParams)
+      .map(
+        ([key, value]) =>
+          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+      )
+      .join("&");
+
+    config.url += `?${queryString}`;
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(response.data);
+        onSearch(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleMoreOptionsClick = () => {
@@ -157,7 +202,7 @@ export const SearchBar = () => {
             </div>
           )}
         </div>
-        <button className="search-bar-search-button">
+        <button onClick={handleSubmit} className="search-bar-search-button">
           <i className="fas fa-search"></i>
         </button>
         <button onClick={handleMoreOptionsClick} className="moreButton">
