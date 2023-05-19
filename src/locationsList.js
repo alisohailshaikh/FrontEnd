@@ -60,7 +60,7 @@ const LocationCard = ({ location }) => {
       <div className="left">
         <img src={location.image} alt="" className="image" />
       </div>
-      <div className="right">
+      <div className="right"> 
         <h2>{location.locationName}</h2>
         <p>
           {location.locationArea},{location.locationAddress}
@@ -105,6 +105,9 @@ const LocationsList = () => {
         <SideBar />
       </div>
       <div className="locations-container">
+      <div className="Search">
+          <SearchBar />
+        </div>
         <h1 className="locations-heading">List of Locations</h1>
         {locations.map((location) => (
           <LocationCard key={location.locationID} location={location} />

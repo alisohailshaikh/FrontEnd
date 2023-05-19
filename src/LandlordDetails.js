@@ -45,7 +45,7 @@ const LandlordDetails = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  })
+  },[])
   return (
     <div>
       <button onClick={handleOpenModal}>Book this location</button>
