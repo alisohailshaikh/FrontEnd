@@ -18,13 +18,28 @@ export const LoginUser = (props) => {
   const [pw, setPasswrod] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
-  const [selectedError, setSelectedError] = useState("");
   const [loginError, setLoginError] = useState("");
 
   const navigate = useNavigate();
+  const validateForm = () => {
+    let isValid = true;
+    if (!email || !email.includes("@")) {
+      setEmailError("Please enter a valid email address.");
+      isValid = false;
+    } else {
+      setEmailError("");
+    }
+    if (!pw || pw.length < 1) {
+      setPasswordError("Password must be at least 8 characters long.");
+      isValid = false;
+    } else {
+      setPasswordError("");
+    }
+    return isValid;
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const isValid = validateForm(); //checking if valid or not
     if (isValid) {
       let data = JSON.stringify({
@@ -50,7 +65,6 @@ export const LoginUser = (props) => {
           //.then has 200 status code
           console.log(JSON.stringify(response.data));
           console.log(`The status is: ${response.status}`);
-          console.log(selectedOption);
           console.log(config.url);
           localStorage.setItem("token", response.data);
           console.log(localStorage.getItem("token"));
@@ -62,23 +76,6 @@ export const LoginUser = (props) => {
           setLoginError("Email or password incorrect");
         });
     }
-  };
-
-  const validateForm = () => {
-    let isValid = true;
-    if (!email || !email.includes("@")) {
-      setEmailError("Please enter a valid email address.");
-      isValid = false;
-    } else {
-      setEmailError("");
-    }
-    if (!pw || pw.length < 1) {
-      setPasswordError("Password must be at least 8 characters long.");
-      isValid = false;
-    } else {
-      setPasswordError("");
-    }
-    return isValid;
   };
 
   return (
@@ -143,6 +140,7 @@ export const LoginUser = (props) => {
               onChange={(e) => setEmail(e.target.value)}
               className="my-text-fieldLU"
             />
+            {emailError}
             <TextField
               margin="normal"
               required
@@ -155,6 +153,9 @@ export const LoginUser = (props) => {
               onChange={(e) => setPasswrod(e.target.value)}
               className="my-text-fieldLU"
             />
+            {passwordError}
+            <h6 className="LoginError">{loginError}</h6>
+
             <div
               style={{
                 display: "flex",
@@ -162,27 +163,25 @@ export const LoginUser = (props) => {
                 marginBottom: "10px",
               }}
             >
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                onClick={handleSubmit}
-                // disabled={!validateForm()}
-                sx={{
-                  mt: -5,
-                  mb: 8,
-                  width: "70%",
-                  backgroundColor: "#f2a3a3",
-                  "&:hover": {
-                    backgroundColor: "#dfa8a8",
-                  },
-                }}
-                className="bt"
-                
-              >
-                Log In
-              </Button>
-            </div>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  onClick={handleSubmit}
+                  sx={{
+                    mt: -5,
+                    mb: 8,
+                    width: "70%",
+                    backgroundColor: "#f2a3a3",
+                    "&:hover": {
+                      backgroundColor: "#dfa8a8",
+                    },
+                  }}
+                  className="bt"
+                >
+                  Log In
+                </Button>
+              </div>
             <Typography
               variant="h"
               color="text.secondary"
@@ -221,6 +220,3 @@ export const LoginUser = (props) => {
     </Grid>
   );
 };
-
-         
-  

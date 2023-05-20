@@ -156,6 +156,8 @@ export const LoginLandlord = (props) => {
               onChange={(e) => setPasswrod(e.target.value)}
               className="my-text-fieldLU"
             />
+             {passwordError}
+            <h6 className="LoginError">{loginError}</h6>
             <div
               style={{
                 display: "flex",
