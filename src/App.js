@@ -19,6 +19,7 @@ import { SignInSide } from './SignupUser';
 import { LoginUser } from './LoginUser';
 import { SignupLandlord } from './SignupLandlord';
 import { LoginLandlord } from './LoginLandlord';
+import NotFound from './NotFound';
 
 function App() {
   const [currForm,setCurrForm]=useState('login');
@@ -45,6 +46,7 @@ function App() {
       <Route path="/myVenues" element={<MyVenues/>}/>
       <Route path="/archive" element={<ArchivedVenues/>}/>
       <Route path="location/:id" element={<LocationDetails/>} />
+      <Route path ="*" element={<NotFound/>}/>
 
 
       </Routes>

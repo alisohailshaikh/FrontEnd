@@ -3,6 +3,7 @@ import axios from "axios";
 import { Backdrop } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import "./landlordDetails.css";
+import { useNavigate } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -17,6 +18,8 @@ const LandlordDetails = (props) => {
   const [info,setInfo] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const classes = useStyles();
+
+  const navigate = useNavigate();
 
   const handleOpenModal = () => {
     setIsOpen(true);
@@ -44,6 +47,7 @@ const LandlordDetails = (props) => {
       })
       .catch((error) => {
         console.log(error);
+        navigate("*");
       });
   },[])
   return (
